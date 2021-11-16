@@ -31,9 +31,10 @@ export class AddTaskComponent implements OnInit {
     }
 
     const NewTask = {
+      id : Math.floor(Math.random() * 100) + 1,
       text :this.text,
       day :this.day,
-      reminder : this.reminder,
+      reminder : this.reminder ? 1 : 0,
     }
 
     this.onAddTask.emit(NewTask)

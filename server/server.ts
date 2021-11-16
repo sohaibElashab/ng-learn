@@ -31,7 +31,7 @@ app.get('/tasks', async (req, res) => {
 });
 
 app.delete('/tasks/:id', async (req, res) => {
-  const tasks = await db.deleteTask(req.params.id);
+  await db.deleteTask(req.params.id);
   res.status(200).json({ succes: true });
 });
 

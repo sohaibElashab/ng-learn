@@ -1,5 +1,5 @@
 <div
-  [ngClass]="{ reminder: task.reminder }"
+  [ngClass]="{ reminder: task.reminder == 1 ? true : false }"
   class="task"
   (dblclick)="onToggel(task)"
 >

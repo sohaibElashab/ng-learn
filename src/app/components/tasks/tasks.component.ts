@@ -10,10 +10,14 @@ import { TaskService } from 'src/app/services/task.service';
 export class TasksComponent implements OnInit {
   tasks: Task[] = [];
 
-  constructor(private taskService: TaskService) {}
-
+  constructor(private taskService: TaskService) {
+    this.taskService.getTask().subscribe((tasks) => {
+      this.tasks = tasks;
+      // console.log(tasks)
+    });
+  }
+  
   ngOnInit(): void {
-    this.taskService.getTask().subscribe((tasks) => (this.tasks = tasks));
   }
 
   deleteTask(task: Task) {
@@ -25,12 +29,13 @@ export class TasksComponent implements OnInit {
   }
 
   toggelTask(task: Task) {
-    task.reminder = !task.reminder;
+    task.reminder = task.reminder == 1 ? 0 : 1;
     this.taskService.updateTask(task).subscribe();
   }
 
   addTask(task: Task) {
+    console.log(this.tasks)
     this.taskService.addTask(task).subscribe((task) => this.tasks.push(task));
-    // console.log(task)
+    console.log(task)
   }
 }
