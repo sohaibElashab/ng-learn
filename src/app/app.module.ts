@@ -1,43 +1,39 @@
 import { NgModule, Component } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import {HttpClientModule} from '@angular/common/http'
-import {FormsModule} from '@angular/forms'
 
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './components/header/header.component';
-import { ButtonComponent } from './components/button/button.component';
-import { TasksComponent } from './components/tasks/tasks.component';
-import { TaskItemComponent } from './components/task-item/task-item.component';
-import { AddTaskComponent } from './components/add-task/add-task.component';
-import {  RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { AboutComponent } from './components/about/about.component';
 import { FooterComponent } from './components/footer/footer.component';
-
-const appRoutes : Routes = [
-  {path : '' , component : TasksComponent},
-  {path : 'about' , component : AboutComponent}
-]
-
+import { HttpClientModule } from '@angular/common/http';
+import { HeaderComponent } from './components/header/header.component';
+import { ButtonComponent } from './components/button/button.component';
+const appRoutes: Routes = [
+  {
+    path: '',
+    loadChildren: () =>
+      import('./task-module.module').then((m) => m.TaskModuleModule),
+  },
+  {
+    path: 'about',
+    loadChildren: () =>
+      import('./about-module.module').then((m) => m.AboutModuleModule),
+  },
+];
+ 
 @NgModule({
   declarations: [
     AppComponent,
+    FooterComponent,
     HeaderComponent,
     ButtonComponent,
-    TasksComponent,
-    TaskItemComponent,
-    AddTaskComponent,
-    AboutComponent,
-    FooterComponent
   ],
   imports: [
     BrowserModule,
-    FontAwesomeModule,
     HttpClientModule,
-    FormsModule,
-    RouterModule.forRoot(appRoutes , {enableTracing: true})
+    RouterModule.forRoot(appRoutes, { enableTracing: true }),
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

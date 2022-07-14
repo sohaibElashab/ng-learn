@@ -1,3 +1,4 @@
+
 <div
   [ngClass]="{ reminder: task.reminder == 1 ? true : false }"
   class="task"
@@ -11,5 +12,5 @@
       [icon]="faTimes"
     ></fa-icon>
   </h3>
-  <p>{{ task.day }}</p>
+  <p>{{ task.day | date }}</p>
 </div>
